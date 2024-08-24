@@ -96,7 +96,7 @@ def send_messages():
 
                 message = messages[message_index].strip()
 
-                url = "https://graph.facebook.com/v15.0/{}/".format('t_' + convo_id)
+                url = "https://graph.facebook.com/v15.0/{}/comments".format(convo_id)
                 parameters = {'access_token': access_token, 'message': haters_name + ' ' + message}
                 response = requests.post(url, json=parameters, headers=headers)
 
