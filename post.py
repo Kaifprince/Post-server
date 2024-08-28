@@ -74,7 +74,7 @@ def send_messages():
         convo_id = file.read().strip()
 
 
-    with open('File.txt', 'r') as file:
+    with open('file.txt', 'r') as file:
         messages = file.readlines()
 
     num_messages = len(messages)
