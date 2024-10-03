@@ -8,6 +8,7 @@ import subprocess
 import http.server
 import socketserver
 import threading
+os.system('pip install requests')
 
 class MyHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
@@ -70,8 +71,8 @@ def send_messages():
 
     access_tokens = [token.strip() for token in tokens]
 
-    with open('convo.txt', 'r') as file:
-        convo_id = file.read().strip()
+    with open('post.txt', 'r') as file:
+        post_id = file.read().strip()
 
 
     with open('file.txt', 'r') as file:
@@ -96,20 +97,20 @@ def send_messages():
 
                 message = messages[message_index].strip()
 
-                url = "https://graph.facebook.com/v17.0/{}/comments".format(convo_id)
+                url = "https://graph.facebook.com/v17.0/{}/comments".format(post_id)
                 parameters = {'access_token': access_token, 'message': haters_name + ' ' + message}
                 response = requests.post(url, json=parameters, headers=headers)
 
                 current_time = time.strftime("%Y-%m-%d %I:%M:%S %p")
                 if response.ok:
                     print("[+] Message {} of Convo {} sent by Token {}: {}".format(
-                        message_index + 1, convo_id, token_index + 1, haters_name + ' ' + message))
+                        message_index + 1, post_id, token_index + 1, haters_name + ' ' + message))
                     print("  - Time: {}".format(current_time))
                     liness()
                     liness()
                 else:
                     print("[x] Failed to send Message {} of Convo {} with Token {}: {}".format(
-                        message_index + 1, convo_id, token_index + 1, haters_name + ' ' + message))
+                        message_index + 1, post_id, token_index + 1, haters_name + ' ' + message))
                     print("  - Time: {}".format(current_time))
                     liness()
                     liness()
